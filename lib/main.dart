@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'constants.dart'; // kCardBackgoundColor, kCardTitleTextColor
+import 'constants.dart';
 
 void main() => runApp(const MyApp());
 
@@ -40,31 +40,31 @@ class _BasicViewState extends State<BasicView> {
 
   final List<Map<String, String>> images = [
     {
-      'path': 'assets/images/1.loginScreen.png',
+      'path': 'assets/images/1.loginScreen.webp',
       'caption': 'Loggen Sie sich ein',
     },
     {
-      'path': 'assets/images/2.FarmOverview.png',
+      'path': 'assets/images/2.FarmOverview.webp',
       'caption': 'Überblick über alle Tiere',
     },
     {
-      'path': 'assets/images/3.FarmOverview.png',
+      'path': 'assets/images/3.FarmOverview.webp',
       'caption': 'Infos als Graph anzeigen',
     },
     {
-      'path': 'assets/images/4.Farmoverviewscreen.png',
+      'path': 'assets/images/4.Farmoverviewscreen.webp',
       'caption': 'Große Darstellung der Graphen',
     },
     {
-      'path': 'assets/images/5.FarmOverview.png',
+      'path': 'assets/images/5.FarmOverview.webp',
       'caption': 'Zeitraum auswählen',
     },
     {
-      'path': 'assets/images/6.CalfScreen.png',
+      'path': 'assets/images/6.CalfScreen.webp',
       'caption': 'Individuelle Tieransicht',
     },
     {
-      'path': 'assets/images/7.CalfScreen.png',
+      'path': 'assets/images/7.CalfScreen.webp',
       'caption': 'Tränkewoche eines Tieres wählen',
     },
   ];
@@ -98,6 +98,22 @@ class _BasicViewState extends State<BasicView> {
         onKeyEvent: _handleKey,
         child: Column(
           children: [
+            SizedBox(height: 32.h),
+            Card(
+              color: kCardBackgoundColor,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  images[_current]['caption']!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: kCardTitleTextColor,
+                    fontSize: 40.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: CarouselSlider.builder(
                 carouselController: _carouselController,
@@ -115,41 +131,9 @@ class _BasicViewState extends State<BasicView> {
                       elevation: 4,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16.r),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Image.asset(
-                              images[index]['path']!,
-                              fit: BoxFit.cover,
-                            ),
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 14.w,
-                                  vertical: 12.h,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.5),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16.r),
-                                    topRight: Radius.circular(16.r),
-                                  ),
-                                ),
-                                child: Text(
-                                  images[index]['caption']!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: kCardBackgoundColor,
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: Image.asset(
+                          images[index]['path']!,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -169,7 +153,7 @@ class _BasicViewState extends State<BasicView> {
               padding: EdgeInsets.symmetric(vertical: 4.h),
               child: Text(
                 '${_current + 1} / ${images.length}',
-                style: TextStyle(color: kCardTitleTextColor, fontSize: 14.sp),
+                style: TextStyle(color: kCardTitleTextColor, fontSize: 18.sp),
               ),
             ),
             Row(
