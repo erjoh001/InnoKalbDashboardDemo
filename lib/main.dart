@@ -45,27 +45,37 @@ class _BasicViewState extends State<BasicView> {
     },
     {
       'path': 'assets/images/2.FarmOverview.webp',
-      'caption': 'Überblick über alle Tiere',
+      'caption':
+          'Verschaffen Sie sich einen schnellen Überblick über alle Tiere Ihres Betriebes',
     },
     {
       'path': 'assets/images/3.FarmOverview.webp',
-      'caption': 'Infos als Graph anzeigen',
+      'caption':
+          'Lassen Sie sich alle Informationen eines Abschnittes als Graph darstellen',
     },
     {
       'path': 'assets/images/4.Farmoverviewscreen.webp',
-      'caption': 'Große Darstellung der Graphen',
+      'caption':
+          'Schauen Sie sich alle Graphen eines Abschnittes als große Darstellung an',
     },
     {
       'path': 'assets/images/5.FarmOverview.webp',
-      'caption': 'Zeitraum auswählen',
+      'caption':
+          'Wählen Sie den Zeitraum in dem Sie Ihren Betrieb betrachten wollen',
     },
     {
       'path': 'assets/images/6.CalfScreen.webp',
-      'caption': 'Individuelle Tieransicht',
+      'caption': 'Schauen Sie sich jedes Tier individuell an',
     },
     {
       'path': 'assets/images/7.CalfScreen.webp',
-      'caption': 'Tränkewoche eines Tieres wählen',
+      'caption':
+          'Wählen Sie welche Tränkewoche eines einzelnen Tieres Sie betrachten möchten',
+    },
+    {
+      'path': 'assets/images/8.devices.webp',
+      'caption':
+          'Erfassung der Daten durch: AlmaPro + Vital Control + Digitale Kälberkarte',
     },
   ];
 
@@ -87,123 +97,98 @@ class _BasicViewState extends State<BasicView> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final bool isWideScreen = screenWidth > 600;
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(182, 187, 198, 203),
       body: KeyboardListener(
         focusNode: _focusNode,
         autofocus: true,
         onKeyEvent: _handleKey,
-        child: Column(
-          children: [
-            SizedBox(height: 32.h),
-            Card(
-              color: kCardBackgoundColor,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  images[_current]['caption']!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: kCardTitleTextColor,
-                    fontSize: 40.sp,
-                    fontWeight: FontWeight.bold,
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: 32.h),
+              Card(
+                color: kCardBackgoundColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    images[_current]['caption']!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: kCardTitleTextColor,
+                      fontSize: 40.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: CarouselSlider.builder(
-                carouselController: _carouselController,
-                itemCount: images.length,
-                itemBuilder: (context, index, realIndex) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
-                      vertical: 16.h,
-                    ),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.r),
+              Expanded(
+                child: CarouselSlider.builder(
+                  carouselController: _carouselController,
+                  itemCount: images.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 16.h,
                       ),
-                      elevation: 4,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16.r),
-                        child: Image.asset(
-                          images[index]['path']!,
-                          fit: BoxFit.cover,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.r),
+                        ),
+                        elevation: 4,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16.r),
+                          child: Image.asset(
+                            images[index]['path']!,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-                options: CarouselOptions(
-                  viewportFraction: 1,
-                  enlargeCenterPage: true,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 15),
-                  onPageChanged:
-                      (index, reason) => setState(() => _current = index),
+                    );
+                  },
+                  options: CarouselOptions(
+                    viewportFraction: 1,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 15),
+                    onPageChanged:
+                        (index, reason) => setState(() => _current = index),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 4.h),
-              child: Text(
-                '${_current + 1} / ${images.length}',
-                style: TextStyle(color: kCardTitleTextColor, fontSize: 18.sp),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.h),
+                child: Text(
+                  '${_current + 1} / ${images.length}',
+                  style: TextStyle(color: kCardTitleTextColor, fontSize: 18.sp),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(images.length, (index) {
-                return Container(
-                  width: 10.w,
-                  height: 10.w,
-                  margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color:
-                        _current == index
-                            ? kCardTitleTextColor.withOpacity(0.9)
-                            : kCardTitleTextColor.withOpacity(0.4),
-                  ),
-                );
-              }),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _navButton(
-                    Icons.arrow_left,
-                    () => _carouselController.previousPage(),
-                    isWideScreen,
-                  ),
-                  _navButton(
-                    Icons.arrow_right,
-                    () => _carouselController.nextPage(),
-                    isWideScreen,
-                  ),
-                ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(images.length, (index) {
+                  return Container(
+                    width: 10.w,
+                    height: 10.w,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 4.w,
+                      vertical: 8.h,
+                    ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color:
+                          _current == index
+                              ? kCardTitleTextColor.withOpacity(0.9)
+                              : kCardTitleTextColor.withOpacity(0.4),
+                    ),
+                  );
+                }),
               ),
-            ),
-          ],
+              SizedBox(height: 32.h),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  Widget _navButton(IconData icon, VoidCallback onPressed, bool isWide) =>
-      IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          icon,
-          size: isWide ? 60.sp : 36.sp,
-          color: kCardTitleTextColor,
-        ),
-      );
 }
