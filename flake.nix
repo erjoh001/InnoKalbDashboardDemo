@@ -9,12 +9,13 @@
   outputs = { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs { inherit system; };
+      lib = pkgs.lib;
     in 
     rec {
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
           flutter
-          yq-go
+          yq
           clang
           cmake
           dart
@@ -54,15 +55,14 @@
       };
 
       packages = {
-        innokalb-demo-web = pkgs.stdenv.mkDerivation rec {
-          name = "flutter-web-app";
+        innokalb-demo-web = pkgs.flutter.buildFlutterApplication rec {
+          pname = "innokalb-demo-web";
           version = "0.1.0";
-          src = ./build;
-          buildPhase = ''
-            mkdir -p $out
-            cp -r $src/web/* $out/
-          '';
+          targetFlutterPlatform = "web";
+          src = ./.;
+          pubspecLock = lib.importJSON ./pubspec.lock.json;
         };
       };
+      defaultPackage = packages.innokalb-demo-web;
     });
 }
