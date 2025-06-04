@@ -278,14 +278,54 @@ class _StartscreenState extends State<Startscreen> {
                           ],
                         ),
                         SizedBox(height: 20),
-                        Text(
-                          description,
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                            color: kCardTitleTextColor,
-                            fontSize: 16.sp,
+                        RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              color: kCardTitleTextColor,
+                              fontSize: 16.sp,
+                              height: 1.5,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: "Projekt InnoKalb\n\n",
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextSpan(
+                                text:
+                                    "Die Grundlage für gesunde, leistungsfähige Milchkühe und Mastrinder wird schon früh gelegt – nämlich in der Zeit rund um die Geburt und in den ersten Lebenstagen des Kalbes. Der Umgang mit dem tragenden Muttertier sowie ein gutes Gesundheitsmanagement in der Kälberaufzucht sind daher wichtige Investitionen in die Zukunft jedes Betriebes. Trotzdem werden Gesundheitsdaten von Kälbern und Jungtieren bisher oft nur lückenhaft erfasst und dokumentiert.\n\n",
+                              ),
+                              TextSpan(
+                                text:
+                                    "Um genau hier anzusetzen, haben wir als LKV NRW gemeinsam mit dem LKV Baden-Württemberg, der Fachhochschule Südwestfalen und der Firma Urban das Projekt „",
+                              ),
+                              TextSpan(
+                                text: 'InnoKalb',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(text: '" gestartet.\n\n'),
+                              TextSpan(
+                                text:
+                                    "Ziel des Projekts ist es, wichtige Daten rund um die Kalbung, allgemeine Gesundheitsbefunde und das Körpergewicht der Kälber zu erfassen und diese Informationen gleichzeitig mit weiteren Infos, wie bspw. Tränkedaten oder der Umgebungstemperatur zu verknüpfen. Dafür kommen unter anderem das VitalControl-Gerät der Firma Urban und Klimalogger zum Einsatz. Die gesammelten Informationen sollen dem Landwirt schnell, einfach und an einem Ort zur Verfügung gestellt werden. In der ersten Projektphase haben teilnehmende Pilotbetriebe schon mit der Datenerfassung gestartet. In Zusammenarbeit mit den Projektpartnern wurde von der Fachhochschule ein erstes Dashboard entwickelt, das nun getestet werden soll.\n\n",
+                              ),
+                              TextSpan(
+                                text: "Wir suchen Sie:\n\n",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(
+                                text:
+                                    "Wir suchen deshalb jetzt weitere, motivierte Projektbetriebe, die sich näher mit der eigenen Kälberaufzucht beschäftigen wollen. Sie bekommen das VitalControl Gerät und einen Klimalogger kostenlos für die Projektlaufzeit zur Verfügung gestellt und können aktiv an der Gestaltung des InnoKalb-Tools mitwirken. Erste Impressionen des aktuellen Dashboards finden Sie in der Bilder-Demo. Es ist dabei ganz egal, ob Sie schon viel im Kälberbereich unternehmen oder sich erst jetzt intensiver mit einem Kälbermanagement beschäftigen möchten.\n\n",
+                              ),
+                              TextSpan(
+                                text:
+                                    "Sind Sie interessiert?\nMelden Sie sich gerne bei uns!",
+                              ),
+                            ],
                           ),
                         ),
+
                         SizedBox(height: 20),
                         Container(
                           decoration: BoxDecoration(
